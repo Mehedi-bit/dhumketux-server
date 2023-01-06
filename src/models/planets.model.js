@@ -4,7 +4,7 @@ const { parse } = require('csv-parse');
 
 const habitablePlanets = [];
 
-// FIND inhabitable planets
+// Find inhabitable planets
 function isHabitablePlanet(planet) {
   // Check Confirmation, Amount of Sunlight and the Planetary radius
   return planet['koi_disposition'] === 'CONFIRMED'
@@ -43,6 +43,7 @@ function loadPlanetsData () {
 function getAllPlanets() {
   return habitablePlanets;
 }
+
 
 
 module.exports = {
