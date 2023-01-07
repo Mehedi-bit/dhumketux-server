@@ -15,9 +15,10 @@ const server = http.createServer(app);
 
 async function startServer() {
     mongoose.set("strictQuery", false);
-    mongoose.connect(process.env.MONGO_URL, () => {
-        console.log('Connected to the database');
-    });
+    await mongoose.connect(process.env.MONGO_URL)
+    .then(() => console.log("Connected to the database"))
+    .catch((err) => console.log(`Error connecting to mongodb ${err}`))
+    
     await loadPlanetsData();
 
     server.listen(PORT, () => {
