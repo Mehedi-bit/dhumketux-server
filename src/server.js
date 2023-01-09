@@ -1,8 +1,8 @@
 const http = require('http');
-const mongoose = require('mongoose');
 
 const app = require('./app');
 
+const { mongoConnect } = require('./services/mongo');
 const { loadPlanetsData } = require('./models/planets.model')
 
 const dotenv = require('dotenv');
@@ -14,11 +14,7 @@ const server = http.createServer(app);
 
 
 async function startServer() {
-    mongoose.set("strictQuery", false);
-    await mongoose.connect(process.env.MONGO_URL)
-    .then(() => console.log("Connected to the database"))
-    .catch((err) => console.log(`Error connecting to mongodb ${err}`))
-    
+    await mongoConnect();
     await loadPlanetsData();
 
     server.listen(PORT, () => {
